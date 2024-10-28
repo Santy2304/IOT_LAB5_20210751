@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">IOT_Lab5_20210751</string>
+
+    <string-array name="opciones_spinner_genero">
+        <item>-Selecciones una opción-</item>
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+
+    <string-array name="opciones_spinner_actividad">
+        <item>-Selecciones una opción-</item>
+        <item>Ninguno</item>
+        <item>Ligero</item>
+        <item>Moderado</item>
+        <item>Fuerte</item>
+        <item>Muy Fuerte</item>
+    </string-array>
+</resources>
