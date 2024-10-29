@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
         android:text="¡Bienvenido!"
-        android:textSize="24dp"
+        android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,11 +43,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pesoText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Peso (kg)">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pesoText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -55,12 +55,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/alturaText"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Altura (m)">
+            android:hint="Altura (cm)">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/alturaText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -68,12 +68,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edadText"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Edad (años)">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edadText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -83,7 +83,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -107,7 +107,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -133,7 +133,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed"
             android:textStyle="bold"
             android:textSize="18dp"
