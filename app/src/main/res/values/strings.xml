@@ -27,5 +27,12 @@
         <item>60 minutos</item>
     </string-array>
 
-
+    <string-array name="opciones_spinner_comidas">
+        <item>Ninguno</item>
+        <item>Platano - 89 cal</item>
+        <item>Leche - 100 cal</item>
+        <item>Carne - 143 cal</item>
+        <item>Pollo - 239 cal</item>
+        <item>Pescado - 206 cal</item>
+    </string-array>
 </resources>

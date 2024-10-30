@@ -8,114 +8,63 @@
     tools:context=".PrincipalActivity">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text="TU META ES"/>
-        <TextView
-            android:id="@+id/TMBText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text=" calorías"/>
-
-
-        <com.google.android.material.slider.Slider
-            android:layout_marginTop="10dp"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="18sp"
-            android:valueFrom="0.0"
-            android:valueTo="100.0"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:layout_gravity="center_horizontal"
-            android:text="Te faltan calorías"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:text="TU META ES"/>
+            <TextView
+                android:id="@+id/TMBText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:text=" calorías"/>
 
-        <com.google.android.material.card.MaterialCardView
-            style="?attr/materialCardViewElevatedStyle"
-            android:layout_width="390dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="12dp">
-            <LinearLayout
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider"
+                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/notifications_24px"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
+                android:layout_height="18sp"
+                android:valueFrom="0.0"
+                android:valueTo="100.0"
+                />
 
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="Notificaciones cada"/>
+            <TextView
+                android:id="@+id/indicadorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_gravity="center_horizontal"
+                android:text="Te faltan calorías"/>
 
-                <Spinner
-                    android:id="@+id/minutosNotiPersonalizada"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:entries="@array/opciones_spinner_minutos"
-                    android:spinnerMode="dialog" />
-
-                <Button
-                    android:id="@+id/aplicarNoti"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="Ok"
-                    />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.card.MaterialCardView
-            style="?attr/materialCardViewElevatedStyle"
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="12dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:orientation="vertical">
-
+            <com.google.android.material.card.MaterialCardView
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="390dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="4dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -125,119 +74,289 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/restaurant_24px"
+                        app:srcCompat="@drawable/notifications_24px"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginStart="10dp"
 
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="Registrar comidas"/>
+                        android:text="Notificaciones cada"/>
+
+                    <Spinner
+                        android:id="@+id/minutosNotiPersonalizada"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:entries="@array/opciones_spinner_minutos"
+                        android:spinnerMode="dialog" />
+
+                    <Button
+                        android:id="@+id/aplicarNoti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:text="Ok"
+                        />
+
                 </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="390dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:padding="10dp"
+                    android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/restaurant_24px"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="12dp"
+
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:textStyle="bold"
+                            android:textSize="18dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Registrar comidas"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:textSize="12dp"
+                            android:layout_marginStart="12dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Desayuno: 9:00 - 11:00"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:textSize="12dp"
+
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Almuerzo: 13:00 - 15:00"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:textSize="12dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Cena: 18:00 - 22:00"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="220dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Nombre">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/nombreComida"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="120dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Calorias">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/calComida"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/registrarComidas"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:text="Registrar"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:textSize="12dp"
-                        android:layout_marginStart="12dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="Desayuno: 9:00 - 11:00"/>
+                        android:text="Alimentos predefinidos"/>
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/spinnerAlimentos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:textSize="12dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_gravity="center_horizontal"
+                        android:entries="@array/opciones_spinner_comidas"
+                        android:spinnerMode="dialog" />
 
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Almuerzo: 13:00 - 15:00"/>
-
-                    <TextView
+                    <Button
+                        android:id="@+id/registrarAliPre"
+                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:textSize="12dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Cena: 18:00 - 22:00"/>
+                        android:text="Registrar"
+                        />
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <Button
-                    android:id="@+id/irComidas"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ir"
-                    />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="390dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="4dp">
 
-        <com.google.android.material.card.MaterialCardView
-            style="?attr/materialCardViewElevatedStyle"
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-            <LinearLayout
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="10dp"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/sprint_24px"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Registrar Actividad"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="220dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Nombre">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/nombreActivity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="120dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Calorias">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/calActivity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/registrarActividad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Registrar" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="20dp"
+                android:text="Resumen de calorías"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/sprint_24px"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="12dp"
+                android:layout_height="wrap_content">
+            </androidx.recyclerview.widget.RecyclerView>
 
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Registrar Actividad"/>
-                </LinearLayout>
-                <Button
-                    android:id="@+id/irActividades"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_height="wrap_content"
-                    android:text="ir"
-                    />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:textSize="20dp"
-            android:text="Resumen de calorías consumidas"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textoNada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Todavía no se han registrado datos"
+                android:fontFamily="sans-serif-condensed" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

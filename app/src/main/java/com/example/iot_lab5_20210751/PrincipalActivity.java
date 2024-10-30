@@ -7,13 +7,17 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -21,32 +25,66 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.iot_lab5_20210751.Adapters.ComidasAdapter;
+import com.example.iot_lab5_20210751.Beans.Comida;
+import com.google.android.material.slider.Slider;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 public class PrincipalActivity extends AppCompatActivity {
     Button irComida;
-    Button irActividad;
+    Button registrarActividad;
     Button aplicarNoti;
+    Button registrarPredeterminado;
+    TextInputEditText nombreActividadTexto;
+    TextInputEditText calActividadTexto;
+    TextInputEditText nombreComidaTexto;
+    TextInputEditText calComidaTexto;
+    double caloriasConsumidas;
     double TMB;
     TextView TMBTetx;
+    TextView textoNada;
     Spinner SpinnerMinutos;
     String channelId = "noti";
+    TextView TMBindicadorText;
+    Spinner spinerAlimentos;
+    List<Comida> ListaComidas = new ArrayList<>();
+
+    Slider slider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_principal);
+        caloriasConsumidas = 0;
+        TMB = getIntent().getDoubleExtra("TMB",0);
+        TMB = (int) (TMB*100)/100.0;
 
         crearCanalNotificacion();
+        textoNada = findViewById(R.id.textoNada);
+        slider = findViewById(R.id.slider);
+        calComidaTexto = findViewById(R.id.calComida);
+        nombreComidaTexto = findViewById(R.id.nombreComida);
+        registrarPredeterminado = findViewById(R.id.registrarAliPre);
+        nombreActividadTexto = findViewById(R.id.nombreActivity);
+        calActividadTexto = findViewById(R.id.calActivity);
+        TMBindicadorText = findViewById(R.id.indicadorText);
         SpinnerMinutos = findViewById(R.id.minutosNotiPersonalizada);
         aplicarNoti = findViewById(R.id.aplicarNoti);
-        irComida = findViewById(R.id.irComidas);
-        irActividad = findViewById(R.id.irActividades);
+        irComida = findViewById(R.id.registrarComidas);
+        spinerAlimentos = findViewById(R.id.spinnerAlimentos);
+        registrarActividad = findViewById(R.id.registrarActividad);
         TMBTetx = findViewById(R.id.TMBText);
-        TMB = getIntent().getDoubleExtra("TMB",0);
         TMBTetx.setText(TMB+" calorías");
+        TMBindicadorText.setText("Te faltan "+TMB+" Calorias");
         ApplicationThreads application = (ApplicationThreads) getApplication();
         ExecutorService executorService = application.executorService;
 
@@ -58,7 +96,9 @@ public class PrincipalActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     while (true){
-                        lanzarNotificacion();
+                        String title = "Recordatorio";
+                        String content = "Vamos, debes alcanzar tu meta de calorías, no te rindas";
+                        lanzarNotificacion(title,content);
                         try {
                             Thread.sleep(intervalo);
                         } catch (InterruptedException e) {
@@ -72,10 +112,54 @@ public class PrincipalActivity extends AppCompatActivity {
         });
 
         irComida.setOnClickListener(view -> {
-            Intent intent = new Intent(PrincipalActivity.this,RegistrarComidasActivity.class);
-            intent.putExtra("TMB",TMB);
-            startActivity(intent);
+            double caloriasCom = Double.parseDouble(calComidaTexto.getText().toString());
+            registrarComida(caloriasCom);
+            Comida comida = new Comida();
+            comida.setNombre(nombreComidaTexto.getText().toString());
+            comida.setCalorias(caloriasCom);
+            ListaComidas.add(comida);
         });
+
+        registrarPredeterminado.setOnClickListener(view -> {
+            String alimento = spinerAlimentos.getSelectedItem().toString();
+            double calorias = 0;
+            String nombre = "";
+            if (alimento.equals("Platano - 89 cal")){
+                nombre="Platano";
+                calorias = 89;
+            } else if (alimento.equals("Leche - 100 cal")) {
+                calorias = 100;
+                nombre="Leche";
+
+            } else if (alimento.equals("Carne - 143 cal")) {
+                calorias=143;
+                nombre="Carne";
+
+            } else if (alimento.equals("Pollo - 239 cal")) {
+                calorias=239;
+                nombre="Pollo";
+
+            } else if (alimento.equals("Pescado - 206 cal")) {
+                calorias=206;
+                nombre="Pescado";
+            }
+            Comida comida = new Comida();
+            comida.setNombre(nombre);
+            comida.setCalorias(calorias);
+            ListaComidas.add(comida);
+            registrarComida(calorias);
+
+        });
+
+        registrarActividad.setOnClickListener(view -> {
+            double caloriasAct = Double.parseDouble(calActividadTexto.getText().toString());
+            Comida comida = new Comida();
+            comida.setNombre(nombreActividadTexto.getText().toString());
+            comida.setCalorias(caloriasAct);
+            ListaComidas.add(comida);
+            registrarActividad(caloriasAct);
+        });
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -113,14 +197,14 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
-    public void lanzarNotificacion() {
+    public void lanzarNotificacion(String title, String content) {
         Intent intent = new Intent(this, PrincipalActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.notifications_24px)
-                .setContentTitle("Recordatorio")
-                .setContentText("Vamos, debes alcanzar tu meta de calorías, no te rindas")
+                .setContentTitle(title)
+                .setContentText(content)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
@@ -155,5 +239,75 @@ public class PrincipalActivity extends AppCompatActivity {
             minutes=60*60*1000;
         }
         return minutes;
+    }
+
+    public void registrarActividad(double calorias){
+
+        caloriasConsumidas = caloriasConsumidas-calorias;
+
+        if (caloriasConsumidas>TMB){
+            double aux = caloriasConsumidas-TMB;
+            TMBindicadorText.setText("Necesitas bajar "+aux+" calorias");
+            String title = "Alerta";
+            String content = "Has superado las calorias necesarias, has ejercicio y empieza a comer menos.";
+            slider.setValue(100);
+            slider.setTrackActiveTintList(ColorStateList.valueOf(Color.RED));
+           lanzarNotificacion(title,content);
+        } else if (caloriasConsumidas<TMB) {
+            double aux = TMB-caloriasConsumidas;
+            TMBindicadorText.setText("Te faltan "+aux+"Calorias");
+
+            int per = (int) ((caloriasConsumidas / TMB) * 100);
+            slider.setValue(per);
+
+        }else {
+            String title = "Felicidades";
+            String content = "Ya has llegado a tu meta de calorías";
+            slider.setValue(100);
+            slider.setTrackActiveTintList(ColorStateList.valueOf(Color.GREEN));
+            lanzarNotificacion(title,content);
+        }
+        textoNada.setVisibility(View.INVISIBLE);
+        ComidasAdapter adapter = new ComidasAdapter();
+        adapter.setContext(this);
+        adapter.setListaComidas(ListaComidas);
+
+        RecyclerView recyclerView = findViewById(R.id.recycler);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void registrarComida(double calorias){
+
+        caloriasConsumidas = caloriasConsumidas+calorias;
+
+        if (caloriasConsumidas>TMB){
+            double aux = caloriasConsumidas-TMB;
+            TMBindicadorText.setText("Necesitas bajar "+aux+" calorias");
+            String title = "Alerta";
+            String content = "Has superado las calorias necesarias, has ejercicio y empieza a comer menos.";
+            slider.setValue(100);
+            slider.setTrackActiveTintList(ColorStateList.valueOf(Color.RED));
+            lanzarNotificacion(title,content);
+        } else if (caloriasConsumidas<TMB) {
+            double aux = TMB-caloriasConsumidas;
+            TMBindicadorText.setText("Te faltan "+aux+"Calorias");
+            int per = (int) ((caloriasConsumidas / TMB) * 100);
+            slider.setValue(per);
+        }else {
+            String title = "Felicidades";
+            String content = "Ya has llegado a tu meta de calorías.";
+            slider.setValue(100);
+            slider.setTrackActiveTintList(ColorStateList.valueOf(Color.GREEN));
+            lanzarNotificacion(title,content);
+        }
+        textoNada.setVisibility(View.INVISIBLE);
+        ComidasAdapter adapter = new ComidasAdapter();
+        adapter.setContext(this);
+        adapter.setListaComidas(ListaComidas);
+
+        RecyclerView recyclerView = findViewById(R.id.recycler);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
