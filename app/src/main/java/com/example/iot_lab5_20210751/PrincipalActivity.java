@@ -71,6 +71,8 @@ public class PrincipalActivity extends AppCompatActivity {
         crearCanalNotificacion();
         textoNada = findViewById(R.id.textoNada);
         slider = findViewById(R.id.slider);
+        slider.setTrackActiveTintList(ColorStateList.valueOf(Color.BLUE));
+
         calComidaTexto = findViewById(R.id.calComida);
         nombreComidaTexto = findViewById(R.id.nombreComida);
         registrarPredeterminado = findViewById(R.id.registrarAliPre);
